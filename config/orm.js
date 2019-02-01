@@ -1,7 +1,8 @@
-var connection = require('../config/connection.js');
+// Dependencies 
+const connection = require('../config/connection.js');
 
 
-var orm = {
+const orm = {
 // Selecting a burger
     selectAll: function (cb) {
         var queryString = "SELECT * FROM burgers";
