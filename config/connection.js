@@ -1,3 +1,4 @@
+// Dependencies
 const mysql = require("mysql");
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ if (process.env.JAWSDB_URL) {
     });
 }
 
+// If error connecting
 connection.connect(function (err) {
     if (err) {
         console.error("error coneccting: " + err.stack);
