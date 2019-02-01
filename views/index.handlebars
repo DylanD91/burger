@@ -2,6 +2,7 @@
 <br>
 
 <div id='avail'>
+    {{!-- Available Burgers --}}
     <h2>Burgers Available to Eat:</h2>
     <ul>
         {{#each burgers}} {{#unless this.devoured}}
@@ -17,6 +18,7 @@
         {{/unless}} {{/each}}
     </ul>
 </div>
+{{!-- Burgers that have been eaten --}}
 <div id='devoured'>
     <h2>Burgers That Have <br>Been Devoured: </h2>
 
@@ -28,6 +30,8 @@
         {{/if}} {{/each}}
     </ul>
 </div>
+
+{{!-- Adding a burger --}}
 
 <div id='add'>
     <h2>Add a Burger: </h2>
