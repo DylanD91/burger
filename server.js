@@ -1,30 +1,28 @@
 // Dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
+const express = require("express");
+const bodyParser = require("body-parser");
 
-var app = express();
+
+const app = express();
 
 
 // Sets up the express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(express.static(process.cwd() + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(methodOverride("_method"));
 // handlebars
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({
 	defaultLayout: "main"
 }));
 app.set("view engine", "handlebars");
 
-// Static Directory
-app.use(express.static('./public'));
- 
-require("./controllers/burger_controller.js")(app);
+const router = require('./controllers/burgers_controller.js');
+app.use('/', router);
 
-app.set('port', process.env.PORT);
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(app.get('port'), () => {
     console.log(`Express app listening on ${app.get('port')}`);
