@@ -4,9 +4,9 @@ const connection = require('../config/connection.js');
 
 const orm = {
 // Selecting a burger
-    selectAll: function (cb) {
-        var queryString = "SELECT * FROM burgers";
-        connection.query(queryString, function (err, result) {
+    selectAll: function (tableInput, cb) {
+        const query = "SELECT * FROM burgers";
+        connection.query(query, function (err, result) {
             if (err) {
                 throw err;
             }

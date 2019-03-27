@@ -1,12 +1,11 @@
 // Dependencies
-const express = require("express");
-const bodyParser = require("body-parser");
+var express = require("express");
 
 // Port
-const PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
 // Express
-const app = express();
+var app = express();
 
 
 // Sets up the express app to handle data parsing
@@ -17,18 +16,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // handlebars
-const exphbs = require("express-handlebars");
+var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({
-	defaultLayout: "main"
-}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+	
+
 app.set("view engine", "handlebars");
 
 //Import routes 
-const routes = require("./controllers/burger_controller.js");
+var routes = require("./controllers/burger_controller.js");
 
 app.use(routes);
 
-app.listen(app.get('port'), () => {
-    console.log(`Express app listening on ${app.get('port')}`);
+app.listen(PORT, function() {
+console.log("App now listening at http://localhost:" + PORT);
 });
