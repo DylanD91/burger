@@ -1,46 +1,56 @@
-<h1>Eat Da Burger, Eat it Now!</h1>
-<br>
+<h1 class="col-md-12">Eat Da Burger!</h1>
 
-<div id='avail'>
-    {{!-- Available Burgers --}}
-    <h2>Burgers Available to Eat:</h2>
-    <ul>
-        {{#each burgers}} {{#unless this.devoured}}
-        <li>
-            {{this.id}}. {{this.burger_name}}
+<h4 class="col-md-12">Delicious Burgers for you!</h2>
 
-            <form action="/{{this.id}}?_method=PUT" method="POST">
-                <input type="hidden" name="devoured" value="false">
-                <button class="btn btn-warning" type="submit">Eat Me!</button>
-            </form>
+  <ul class="col-md-6">
+    {{#each burgers}}
+    {{#unless devoured}}
+    <li>
+      <p>
+        {{this.id}}. {{this.burger_name}}
+        <button data-devouredid="{{this.id}}" class="devoured btn">Devoured...!</button>
+       
+        <button class="btn">
+          <a href="/api/burgers/{{this.id}}">Update this burger</a>
+        </button>
+      </p>
+    </li>
+    {{/unless}}
+    {{/each}}
+  </ul>
 
-        </li>
-        {{/unless}} {{/each}}
-    </ul>
-</div>
-{{!-- Burgers that have been eaten --}}
-<div id='devoured'>
-    <h2>Burgers That Have <br>Been Devoured: </h2>
+  <ul class="col-md-6">
+    {{#each burgers}}
+    {{#if devoured}}
+    <li>
+      <p>
+        {{this.id}}. {{this.burger_name}}
+        <button data-deleteid="{{this.id}}" class="delete btn">Delete...!</button>
 
-    <ul>
-        {{#each burgers}} {{#if this.devoured}}
-        <li>
-            {{this.id}}. {{this.burger_name}}
-        </li>
-        {{/if}} {{/each}}
-    </ul>
-</div>
+      </p>
+    </li>
+    {{/if}}
+    {{/each}}
+  </ul>
 
-{{!-- Adding a burger --}}
+  <form class="create-form col-md-6">
+    <h2>Add a Burger</h2>
+    <div class="form-group">
+      <label for="burgername">Burger Name:</label>
+      <input type="text" id="burgername" name="burgername">
+    </div>
+    <button type="submit" class="btn">Add Your Burger</button>
+    <p>Enter a burger you want to eat Click the 'Submit' button</p>
+  </form>
 
-<div id='add'>
-    <h2>Add a Burger: </h2>
-
-    <form class="create-update-form" action="/" method="POST">
-        <div class="form-group">
-            <label for="dab">Burger Name:</label>
-            <input type="text" id="dab" name="burger_name">
-        </div>
-        <button class="btn btn-primary" type="submit">Add Burger</button>
-    </form>
-</div>
+  <form class="select-form col-md-6">
+    <h2>Select a burgers</h2>
+    <div class="form-group">
+      <select name="select">
+        {{#each burgers}}
+        <option data-id="{{this.id}}" value="{{this.burger_name}}">{{this.burger_name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <button type="submit" class="btn">Add this Burger!</button>
+  </form>
