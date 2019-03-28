@@ -1,9 +1,9 @@
 // Dependencies
-const express = require("express");
-const burger = require("../models/burger.js");
+var express = require("express");
+var burger = require("../models/burger.js");
 
 // Creating a router
-const router = express.Router();
+var router = express.Router();
 router.get("/", function (req, res) {
     burger.selectAll(function(data) {
         var hbsObject = {
