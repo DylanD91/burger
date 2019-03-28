@@ -5,12 +5,12 @@ var burger = require("../models/burger.js");
 // Creating a router
 var router = express.Router();
 router.get("/", function (req, res) {
-    burger.selectAll(function(data) {
-        var hbsObject = {
+    burger.all(function(data) {
+        var burgers = {
             burgers: data
         };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
+        console.log(burgers);
+        res.render("index", burgers);
     });
 });
 // New Burger
@@ -32,6 +32,23 @@ router.put("/api/burgers/:id", function(req, res) {
             res.status(200).end();
         }
     });
+});
+
+router.delete("/api/burgers/:id", (req, res) => {
+    console.log("controller fire");
+    const condition = `id = ${req.params.id}`;
+    burger.delete(condition, (result) => {
+        console.log(`RESULT = ${result}`);
+        console.log(result);
+        
+        if (result.affectedRows == 0){
+            return res.status(404).end();
+        }
+        else{
+            console.log("deleted")
+            return res.status(200).end();
+        }  
+    })
 });
 
 
